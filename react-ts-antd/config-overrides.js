@@ -2,7 +2,7 @@ const {
   override,
   fixBabelImports,
   addLessLoader,
-  addWebpackPlugin, 
+  addWebpackPlugin,
   addWebpackAlias,
   addDecoratorsLegacy,
   overrideDevServer
@@ -15,7 +15,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-function resolve (pathUrl) {
+function resolve(pathUrl) {
   return path.join(__dirname, pathUrl);
 }
 
@@ -24,11 +24,11 @@ const addCustomize = () => (config) => {
   // config.output.path = resolve('dist');
   if (config.output.publicPath) {
     config.output.publicPath = '/';
-      // isProduction ? '/react-ts-antd-admin/' : '/';
+    // isProduction ? '/react-ts-antd-admin/' : '/';
   }
 
   if (config.resolve) {
-    config.resolve.extensions = ['.js', '.tsx', '.less', '.css'];
+    config.resolve.extensions = ['.js', '.tsx', '.less', '.css', '.ts',];
   }
 
   // 添加js、css打包gzip配置
@@ -72,23 +72,23 @@ module.exports = {
         }
       }
     })),
-    
+
     // 启用装饰器语法
     addDecoratorsLegacy(),
-      
+
     // 配置antd按需引入
     fixBabelImports('import', {
       libraryName: 'antd',
       libraryDirectory: 'es',
       style: true, // 自动打包相关的样式
     }),
-  
+
     // 使用less-loader对源码中的less的变量进行重新指定
     addLessLoader({
       javascriptEnabled: true,
       modifyVars: { '@primary-color': '#2d8cf0' },
     }),
-  
+
     // 配置路径别名
     addWebpackAlias({
       '@': resolve('src'),
@@ -101,4 +101,3 @@ module.exports = {
   // 本地启动配置，可以设置代理
   devServer: overrideDevServer(devServerConfig())
 };
-  

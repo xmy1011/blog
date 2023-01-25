@@ -9,13 +9,11 @@ import Router from './router/config';
 
 
 function App() {
-    
     return (
       <BrowserRouter>
         <Router />
       </BrowserRouter>
     )
-
 }
 
 export default App;
