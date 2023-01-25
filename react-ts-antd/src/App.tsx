@@ -5,16 +5,17 @@
 
 import * as React from 'react';
 import { BrowserRouter } from "react-router-dom";
-import RoutesComp from './router/index';
+import Router from './router/config';
 
-class App extends React.Component {
-  render () {
+
+function App() {
+    
     return (
       <BrowserRouter>
-        <RoutesComp></RoutesComp>
+        <Router />
       </BrowserRouter>
     )
-  }
+
 }
 
 export default App;

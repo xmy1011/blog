@@ -14,11 +14,9 @@ const persistConfig = {
   storage: storage,
   stateReconciler: autoMergeLevel2
 }
-console.log(reducer.toString(), 17);
+
 const myPersistReducer = persistReducer(persistConfig, reducer)
-console.log(
-  myPersistReducer.toString()
-);
+
 // 引入createStore后，store并没有创建，需要调用createStore()后才有store
 const store = createStore(
   myPersistReducer,
@@ -28,6 +26,6 @@ const store = createStore(
 
 export const persistor = persistStore(store)
 
-console.log(store, 31);
+
 
 export default store
