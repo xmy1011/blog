@@ -1,43 +1,37 @@
+//@ts-nocheck
 import Login from "@/views/Login";
 import Home from "@/views/Home";
 import NotFound from "@/components/404";
-import  {  useRoutes } from 'react-router-dom'
-import type { RouteObject} from 'react-router-dom';
 import React from "react";
 import { USER_ROLE_ENUM } from "../constants/user";
+import { RouteObject } from 'react-router-dom'
 
-// 扩展 Route 定义
 export interface RouteProps extends RouteObject {
   meta?: {
     auth?: boolean
-    roles?: USER_ROLE_ENUM[]
-    unRoles?: USER_ROLE_ENUM[]
+    // roles和unRoles冲突的时候，冲突的部分以unRoles为准
+    roles?: USER_ROLE_ENUM[] // 空数组代表没有谁可以访问
+    unRoles?: USER_ROLE_ENUM[] // 空数组代表没有谁不可以访问
   }
   children?: RouteProps[]
 }
 
-const routerCfg: RouteProps[] = [
+export const routers: RouteProps[] = [
   {
     path: '/',
     element: <Home />,
     meta: {
       auth: true,
-      unRoles: [USER_ROLE_ENUM.ADMIN]
+      unRoles: [USER_ROLE_ENUM.GUEST]
     }
   },
   {
     path: '/login',
-    element: <Login />
+    element: <Login />,
+    roles: [USER_ROLE_ENUM.GUEST]
   },
   {
     path: '/404',
     element: <NotFound />,
   },
 ]
-
-const Router = () => {
-  let element = useRoutes(routerCfg);
-  return element;
-}
-
-export default Router;

@@ -1,18 +1,14 @@
-import { act } from 'react-dom/test-utils';
 import * as types from '../actionTypes';
+import { initState } from  '../user';
 
-const initUserInfo = {
-  data: {},
-  isLogined: false,
-}
 
-export default function user(state=initUserInfo, action) {
+export default function user(state=initState, action) {
   switch(action.type){
     case types.SET_USER_INFO:
       return {
         ...state,
-        data: action.data,
-        isLogined: true
+        ...action.data,
+        isLogin: true,
       };
     case types.MODIFY_USER_INFO:
         return {

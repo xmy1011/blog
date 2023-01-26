@@ -4,19 +4,23 @@
  */
 
 import * as React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client'
 import 'antd/dist/antd.less';
 // import '@/styles/base.less';
 import App from './App';
 import store, { persistor } from './store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
+ import { BrowserRouter } from "react-router-dom";
 
-ReactDOM.render(
+ export const root = document.getElementById('root')
+ root &&
+ createRoot(root).render(
   <Provider store={ store }>
     <PersistGate persistor={ persistor }>
-      <App />
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
     </PersistGate>
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 );

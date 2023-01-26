@@ -1,7 +1,18 @@
-import { USER_ROLE_ENUM } from "@/constants/user";
-import {init, setUserInfo} from '@/store/user';
+import store from  '@/store'
+
+/**
+ * 这里本该是读取登录态
+ * 我们直接写死 每次进来都是未登录
+ */
+// @ts-ignore
+let isLogin = store.getState().user.isLogin;
 
 
 
-console.log(USER_ROLE_ENUM.ADMIN);
+export function useAuth() {
+
+    return {
+        isLogin
+    }
+}
 

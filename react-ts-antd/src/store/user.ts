@@ -4,14 +4,14 @@ export interface UserStateProps {
   userId: string,
   name: string,
   phone: string,
-  role: USER_ROLE_ENUM
+  role: USER_ROLE_ENUM,
+  isLogin: boolean
 }
 
-const initState = (): UserStateProps => {
-  return {
-    userId: '',
-    name: '',
-    phone: '',
-    role: USER_ROLE_ENUM.GUEST,
-  }
+export const initState: UserStateProps = {
+  userId: '',
+  name: '',
+  phone: '',
+  role: USER_ROLE_ENUM.GUEST,
+  isLogin: false,
 }
