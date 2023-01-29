@@ -6,12 +6,12 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client'
 import 'antd/dist/antd.less';
-// import '@/styles/base.less';
+import './global.less';
 import App from './App';
 import store, { persistor } from './store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
- import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
  export const root = document.getElementById('root')
  root &&
