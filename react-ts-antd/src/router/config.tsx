@@ -1,10 +1,11 @@
 //@ts-nocheck
 import Login from "@/views/Login";
 import Home from "@/views/Home";
+import BigData from '@/views/BigData';
 import NotFound from "@/components/404";
 import React from "react";
 import { USER_ROLE_ENUM } from "../constants/user";
-import { RouteObject } from 'react-router-dom'
+import {Outlet, RouteObject} from 'react-router-dom'
 
 export interface RouteProps extends RouteObject {
   meta?: {
@@ -23,12 +24,24 @@ export const routers: RouteProps[] = [
     meta: {
       auth: true,
       unRoles: [USER_ROLE_ENUM.GUEST]
+    },
+  },
+  {
+    path: '/bigData',
+    element: <BigData />,
+    meta: {
+      auth: true,
+      unRoles: [USER_ROLE_ENUM.GUEST],
     }
   },
   {
     path: '/login',
     element: <Login />,
-    roles: [USER_ROLE_ENUM.GUEST]
+    meta: {
+      auth: false,
+      roles: [USER_ROLE_ENUM.GUEST]
+    }
+
   },
   {
     path: '/404',

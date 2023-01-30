@@ -8,9 +8,7 @@ import { loginUser } from "@/services/user";
 // }
 
 export const register = (username, pwd) => (dispatch) => {
-  console.log(username, pwd);
 }
 
 export const logout = () => (dispatch) => {
-  console.log('logout')
 }

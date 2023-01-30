@@ -10,3 +10,11 @@ export function loginUser(data: any) {
     }
   })
 }
+
+export function getTableData(params: any) {
+  return service({
+    url:'/queryTaskList',
+    method: 'get',
+    params
+  })
+}

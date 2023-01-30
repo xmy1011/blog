@@ -22,7 +22,6 @@ const Login = () => {
 
   const handleLogin = () => {
     loginUser(loginInfo).then((res) =>{
-      console.log(res, 25)
       // @ts-ignore
       if(res.code === 0){
         store.dispatch(saveUserInfo(res.data));

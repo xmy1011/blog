@@ -16,8 +16,8 @@ const service = axios.create({
 service.interceptors.request.use(config => {
     const { user } = store.getState();
     console.log(user)
-    if(user?.data?.token){
-        config.headers['Authorization'] = store.getState().user.data.token;
+    if(user?.token){
+        config.headers['Authorization'] = user.token;
     }
     return config;
 }, error => {
@@ -27,7 +27,7 @@ service.interceptors.request.use(config => {
 // 响应拦截
 service.interceptors.response.use(
     response =>{
-        console.log(response.data); // {code: '', msg: '',data: {}}
+        // console.log(response.data); // {code: '', msg: '',data: {}}
         if(response.data.code === 401 || response.data.code === 403){
             console.log('退出登录');
             message.error('token失效，或长时间未登录，请重新登录');
