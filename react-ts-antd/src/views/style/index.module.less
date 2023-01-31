@@ -15,14 +15,13 @@
 }
 .header{
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   margin-top: 30px;
-  >span{
-    font-size: 24px;
-    padding: 8px 12px 8px 12px;
-  }
-  >span:focus{
-    color: blue;
+  font-size: 24px;
+  padding: 0 20%;
+  >div{
+    padding: 8px 12px;
+    cursor: pointer;
   }
 }
 .inputLogin {
@@ -44,5 +43,9 @@
   height: 45px;
   margin-top: 40px;
   font-size: 15px;
+}
+.activeTitle{
+  border-bottom: 1px solid blue;
+  color: blue;
 }
 

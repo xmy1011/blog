@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
 import styles from './style/index.module.less';
-import { Input, Button,  Checkbox} from "antd";
+import {Input, Button, Checkbox, message} from "antd";
 import { saveUserInfo } from "@/store/actions";
 import store from "@/store";
 import { useNavigate } from "react-router-dom"
-import {loginUser} from "@/services/user";
+import { loginUser } from "@/services/user";
+import { connect } from 'react-redux';
+import { register } from "@/store/actions";
+
+interface IProps{
+  register: any,
+}
 
 interface UserInfo {
   userName: string;
   userPwd: string;
-  userPwd2?: string;
 }
 
 
-const Login = () => {
+const Login = ({ register }: IProps) => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [loginInfo,setLoginInfo] = useState<UserInfo>({userName: '', userPwd: ''});
@@ -32,17 +37,23 @@ const Login = () => {
     })
 
   }
-
   const handleRegister = () => {
-
+    register(registerInfo.userName,registerInfo.userPwd).then(() =>{
+      message.success('注册成功');
+      setIsLogin(true);
+    })
   }
 
   return (
     <div className={styles.loginContainer}>
       <div className={styles.loginInput}>
         <div className={styles.header}>
-              <span tabIndex={1} onClick={() => {setIsLogin(true)}}>注册</span>
-              <span tabIndex={2} onClick={() => {setIsLogin(false)}}>登录</span>
+              <div
+                className={isLogin? styles.activeTitle : ''}
+                onClick={() => {setIsLogin(true)}}>登录</div>
+              <div
+                className={isLogin? '' :styles.activeTitle}
+                onClick={() => {setIsLogin(false)}}>注册</div>
           </div>
         {
           isLogin ? (
@@ -97,21 +108,11 @@ const Login = () => {
                   })
                 }}
               />
-              <Input
-                placeholder={'请再次确认密码'}
-                value={registerInfo.userPwd2}
-                onChange={(e) => {
-                  setRegisterInfo({
-                    ...registerInfo,
-                    userPwd2: e.target.value
-                  })
-                }}
-              />
               <Button
                 className={styles.btn}
                 type={'primary'}
                 onClick={handleRegister}
-                disabled={!(registerInfo.userPwd && registerInfo.userName && registerInfo.userPwd2)}
+                disabled={!(registerInfo.userPwd && registerInfo.userName)}
               >立即注册</Button>
             </div>
           )
@@ -134,4 +135,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default connect((state: any) => state.user, { register })(Login);

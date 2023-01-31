@@ -1,5 +1,14 @@
 import service from  './axiosEnhancer';
 
+
+export function registerUser(data: any) {
+  return service(({
+    url:'/register',
+    method: 'post',
+    data
+  }))
+}
+
 export function loginUser(data: any) {
   return service({
     url:'/login',
