@@ -13,6 +13,11 @@ export default function user(state=initState, action) {
         token: action.data?.token,
         isLogin: true,
       };
+    case types.CLEAR_USER_INFO:
+      return {
+        ...initState,
+        token: null,
+      }
     default:
       return state;
   }
